@@ -2,6 +2,7 @@ import { Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
 import { join } from 'path';
 
 export default class CdkStarterStack extends Stack {
@@ -15,5 +16,20 @@ export default class CdkStarterStack extends Stack {
       handler: 'main',
       entry: join(__dirname, `/../src/my-lambda/index.ts`),
     });
+
+
+    const table = new Table(this, 'Table', {
+      partitionKey: { name: 'pk', type: AttributeType.STRING },
+      sortKey: { name: 'sk', type: AttributeType.STRING },
+      tableName: 'phu-test-table',
+    });
+
+    table.addGlobalSecondaryIndex({
+      indexName: 'gsi',
+      partitionKey: { name: 'sk', type: AttributeType.STRING },
+      sortKey: { name: 'pk', type: AttributeType.STRING },
+    })
+
+    table.grantReadWriteData(myFunction);
   }
 }
