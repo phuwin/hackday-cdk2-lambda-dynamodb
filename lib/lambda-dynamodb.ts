@@ -8,7 +8,7 @@ export default class CdkStarterStack extends Stage {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const myFunction = new NodejsFunction(this, 'my-function', {
+    const myFunction = new NodejsFunction(scope, 'my-function', {
       memorySize: 256,
       timeout: Duration.seconds(5),
       runtime: Runtime.NODEJS_14_X,
