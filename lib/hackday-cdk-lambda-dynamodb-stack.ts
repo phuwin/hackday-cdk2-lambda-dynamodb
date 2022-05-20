@@ -12,7 +12,7 @@ export class HackdayCdkLambdaDynamodbStack extends Stack {
         input: CodePipelineSource.gitHub('phuwin95/hackday-cdk2-lambda-dynamodb', 'main'),
         commands: ['npm ci', 'npm run build', 'npx cdk synth']
       }),
-      dockerEnabledForSelfMutation: true,
+      dockerEnabledForSynth: true,
     });
     const myStage = new LambdaDynamoDbStage(this, 'LambdaDynamoDbStack');
     pipeline.addStage(myStage);
