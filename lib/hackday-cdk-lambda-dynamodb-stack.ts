@@ -14,8 +14,8 @@ export class HackdayCdkLambdaDynamodbStack extends Stack {
       }),
       dockerEnabledForSynth: true,
     });
-    const myStage = new LambdaDynamoDbStage(this, 'LambdaDynamoDbStack');
-    pipeline.addStage(myStage);
+    // const myStage = new LambdaDynamoDbStage(this, 'LambdaDynamoDbStack');
+    // pipeline.addStage(myStage);
 
   }
 }
